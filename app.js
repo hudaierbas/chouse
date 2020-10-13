@@ -13,6 +13,10 @@ const cartItems = document.querySelector(".cart-items");
 const cartTotal = document.querySelector(".cart-total");
 const cartContent = document.querySelector(".cart-content");
 const productsDOM = document.querySelector(".products-center");
+const navLinksBtn = document.querySelector(".navOpenBtn");
+const navCloseBtn = document.querySelector(".navCloseBtn");
+const navLinks = document.querySelector(".navlinks");
+const linkBtn = document.querySelectorAll(".link");
 
 // cart
 let cart = [];
@@ -127,7 +131,19 @@ class UI {
     cartOverlay.classList.remove("transparentBcg");
     cartDOM.classList.remove("showCart");
   }
+  showNavLinks() {
+    navLinks.classList.add("showNav");
+  }
+  hideNavLinks() {
+    navLinks.classList.remove("showNav");
+  }
   setupAPP() {
+    navLinksBtn.addEventListener("click", this.showNavLinks);
+    navCloseBtn.addEventListener("click", this.hideNavLinks);
+    linkBtn.forEach((link) =>
+      link.addEventListener("click", this.hideNavLinks)
+    );
+
     cart = Storage.getCart();
     this.setCartValues(cart);
     this.populateCart(cart);
